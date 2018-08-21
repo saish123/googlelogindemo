@@ -65,6 +65,12 @@ public class LoginFragment extends Fragment {
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getActivity(), "Login fragment Called", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -92,14 +98,16 @@ public class LoginFragment extends Fragment {
     }
 
     private void updateUI(GoogleSignInAccount account) {
-        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (account != null) {
+            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        SuccessFragment successFragment = new SuccessFragment();
-        fragmentTransaction.replace(R.id.main_frame, successFragment, "SUCCESSFRAGMENT");
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commitAllowingStateLoss();
+            SuccessFragment successFragment = new SuccessFragment();
+            fragmentTransaction.add(R.id.main_frame, successFragment, "SUCCESSFRAGMENT");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
+        }
     }
 
 
