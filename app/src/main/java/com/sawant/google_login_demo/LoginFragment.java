@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 public class LoginFragment extends Fragment {
 
     private static final int RC_SIGN_IN = 23;
+    View rootView;
     private String TAG = "LoginFragment";
 
     public LoginFragment() {
@@ -39,17 +40,20 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
-        SignInButton signInButton = rootView.findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+            SignInButton signInButton = rootView.findViewById(R.id.sign_in_button);
+            signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+            signInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    signIn();
+                }
+            });
+        }
         return rootView;
     }
 
@@ -104,7 +108,7 @@ public class LoginFragment extends Fragment {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             SuccessFragment successFragment = new SuccessFragment();
-            fragmentTransaction.add(R.id.main_frame, successFragment, "SUCCESSFRAGMENT");
+            fragmentTransaction.replace(R.id.main_frame, successFragment, "SUCCESSFRAGMENT");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commitAllowingStateLoss();
         }
