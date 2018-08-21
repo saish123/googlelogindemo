@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         /**
          * Find Fragment by tag
          */
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("SUCCESSFRAGMENT");
+        /*Fragment fragment = getSupportFragmentManager().findFragmentByTag("SUCCESSFRAGMENT");
         if (fragment instanceof SuccessFragment) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment, "SUCCESSFRAGMENT");
-        }
+        }*/
 
     }
 
